@@ -1,22 +1,22 @@
-function getPDFText(src; pages=nothing)
+function getPDFText(src; pages = nothing)
     # handle that can be used for subsequence operations on the document.
     doc = pdDocOpen(src)
 
-    # Metadata extracted from the PDF document. 
-    # This value is retained and returned as the return from the function. 
+    # Metadata extracted from the PDF document.
+    # This value is retained and returned as the return from the function.
     docinfo = pdDocGetInfo(doc)
     io = IOBuffer()
 
-    # Returns number of pages in ithe document       
+    # Returns number of pages in ithe document
     #
     if isnothing(pages)
 
         pages = 1:pdDocGetPageCount(doc)
     end
-    for i = pages
+    for i in pages
         @info "processing page $i"
         try
-            # handle to the specific page given the number index. 
+            # handle to the specific page given the number index.
             page = pdDocGetPage(doc, i)
 
             # Extract text from the page and write it to the output file.
@@ -26,7 +26,7 @@ function getPDFText(src; pages=nothing)
         end
     end
 
-    # Close the document handle. 
+    # Close the document handle.
     # The doc handle should not be used after this call
     pdDocClose(doc)
     return io
