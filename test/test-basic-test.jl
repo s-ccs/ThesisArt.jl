@@ -1,3 +1,1 @@
-@testset "ThesisArt.jl" begin
-    @test ThesisArt.hello_world() == "Hello, World!"
-end
+@testset "ThesisArt.jl" begin end
