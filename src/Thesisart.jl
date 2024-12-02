@@ -1,4 +1,4 @@
-module Thesisart
+module ThesisArt
 using PDFIO
 using BSplineKit
 using RollingFunctions
