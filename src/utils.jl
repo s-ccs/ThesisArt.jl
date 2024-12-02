@@ -5,7 +5,7 @@ end
 
 function newfigure(; size = (420, 594), size_factor = 1, kwargs...)
     f = Figure(; size = size .* size_factor, kwargs...)
-    ax = f[1, 1] = Axis(f)
+    ax = f[1, 1] = Axis(f, backgroundcolor = Makie.GrayA(0, 0))
     hidespines!(ax)
     hidedecorations!(ax)
     return f, ax
@@ -27,7 +27,7 @@ function add_title!(f, title, name, year)
         ax,
         0.85,
         0.05,
-        text = [name * "\n" * string(year)],
+        text = [string(name) * "\n" * string(year)],
         position = [0, 0],
         justification = :right,
         color = "#888",
@@ -35,14 +35,14 @@ function add_title!(f, title, name, year)
     )
     xlims!(ax, (0, 1.0))
     ylims!(ax, (0, 1.0))
-    return (t1, t2, ax)
+    return (t1, t2), ax
 end
 
 function add_spacer!(f, row, col, aspect; debug = false)
     if debug
         a = f[row, col] = Axis(f, backgroundcolor = "red")
     else
-        a = f[row, col] = Axis(f)
+        a = f[row, col] = Axis(f, backgroundcolor = Makie.GrayA(0, 0))
     end
     if length(row) == 1
         # define a row
