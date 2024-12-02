@@ -3,8 +3,8 @@ function get_rotation(x, y)
 end
 
 
-function newfigure(; size=(420, 594), size_factor=1, kwargs...)
-    f = Figure(; size=size .* size_factor, kwargs...)
+function newfigure(; size = (420, 594), size_factor = 1, kwargs...)
+    f = Figure(; size = size .* size_factor, kwargs...)
     ax = f[1, 1] = Axis(f)
     hidespines!(ax)
     hidedecorations!(ax)
@@ -13,17 +13,34 @@ end
 
 function add_title!(f, title, name, year)
     ##return (1, 1), 2
-    ax = add_spacer!(f, 2, 1, 0.3; debug=false)
-    t1 = text!(ax, 0.5, 0.55, text=title, justification=:center, align=(:center, :center), font="Helvetica")
-    t2 = text!(ax, 0.85, 0.05, text=[name * "\n" * string(year)], position=[0, 0], justification=:right, color="#888", fontsize=7)
+    ax = add_spacer!(f, 2, 1, 0.3; debug = false)
+    t1 = text!(
+        ax,
+        0.5,
+        0.55,
+        text = title,
+        justification = :center,
+        align = (:center, :center),
+        font = "Helvetica",
+    )
+    t2 = text!(
+        ax,
+        0.85,
+        0.05,
+        text = [name * "\n" * string(year)],
+        position = [0, 0],
+        justification = :right,
+        color = "#888",
+        fontsize = 7,
+    )
     xlims!(ax, (0, 1.0))
     ylims!(ax, (0, 1.0))
     return (t1, t2, ax)
 end
 
-function add_spacer!(f, row, col, aspect; debug=false)
+function add_spacer!(f, row, col, aspect; debug = false)
     if debug
-        a = f[row, col] = Axis(f, backgroundcolor="red")
+        a = f[row, col] = Axis(f, backgroundcolor = "red")
     else
         a = f[row, col] = Axis(f)
     end
