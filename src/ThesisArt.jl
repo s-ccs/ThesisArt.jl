@@ -15,4 +15,5 @@ export import_pdf
 export get_rotation
 export rolling_inter2d
 export add_spacer!, add_title!, newfigure
+export TextOnPath
 end
