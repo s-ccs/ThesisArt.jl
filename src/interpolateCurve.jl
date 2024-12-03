@@ -47,3 +47,16 @@ end
 function dist2(x, y)
     return sqrt((x[1] - x[2])^2 + (y[1] - y[2])^2)
 end
+
+
+
+#----
+function points_to_bezierpath(points)
+    _point_to_svg =
+        (prev, p, pnext) -> isnan(prev) ? nothing : isnan(p) ? MoveTo(pnext) : LineTo(p)
+    ix = length(points)
+    #points = vcat(NaN, NaN, points)
+    vec_lineto = _point_to_svg.(points[1:ix-2], points[2:ix-1], points[3:ix])
+    vec_lineto = vec_lineto[.!isnothing.(vec_lineto)]
+    return BezierPath(vec_lineto)
+end

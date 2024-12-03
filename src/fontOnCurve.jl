@@ -36,7 +36,7 @@ Note: currently only works for LineTo and MoveTo - not Curve, as Curve interpola
 attribute_per_char_or_segment(string, attr, lengthPoints) =
     Makie.attribute_per_char(string, attr)
 function attribute_per_char_or_segment(string, attr::AbstractVector, lengthPoints)
-
+    @debug lengthPoints, length(attr), length(string)
     if (length(attr) !== length(string)) & (length(attr) == lengthPoints)
         @assert all(isa.([MoveTo(1, 2), LineTo(1, 2)], Union{MoveTo,LineTo})) "Currently no support for BezierSegments other than MoveTo and LineTo"
         return attr
