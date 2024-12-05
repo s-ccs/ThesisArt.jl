@@ -61,6 +61,6 @@ Next, we introduce a color per segment
 ```@example main
 t = ThesisArt.TextOnPath(my_text,my_path_split)
 
-CairoMakie.text(0,0;text=t,color=repeat([:red,:blue],8),fontsize=5)
+CairoMakie.text(0,0;text=t,color=repeat([:red,:blue],8+1),fontsize=5)
 
 ```
