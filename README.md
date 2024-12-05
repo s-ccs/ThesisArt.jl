@@ -12,7 +12,7 @@
 [![All Contributors](https://img.shields.io/github/all-contributors/s-ccs/ThesisArt.jl?labelColor=5e1ec7&color=c0ffee&style=flat-square)](#contributors)
 [![BestieTemplate](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/JuliaBesties/BestieTemplate.jl/main/docs/src/assets/badge.json)](https://github.com/JuliaBesties/BestieTemplate.jl)
 
-## ThesisArt.jl
+## About
 
 <img src="https://github.com/user-attachments/assets/719c1a7c-f1a8-4b2e-8a2c-f5412e69fa29" width="30%"/>
 
