@@ -1,4 +1,4 @@
-# ThesisArt
+# ThesisArt - A visual representation of intellectual pursuits
 
 [![Stable Documentation](https://img.shields.io/badge/docs-stable-blue.svg)](https://s-ccs.github.io/ThesisArt.jl/stable)
 [![In development documentation](https://img.shields.io/badge/docs-dev-blue.svg)](https://s-ccs.github.io/ThesisArt.jl/dev)
