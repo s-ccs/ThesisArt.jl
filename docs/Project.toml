@@ -3,6 +3,7 @@ CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
 Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
 HTTP = "cd3eb016-35fb-5094-929b-558a96fad6f3"
 LiveServer = "16fef848-5104-11e9-1b77-fb7a48bbb589"
+PDFIO = "4d0d745f-9d9a-592e-8d18-1ad8a0f42b92"
 ThesisArt = "6184abd9-1539-47ca-b742-6ec6f8d46641"
 
 [compat]
