@@ -1,4 +1,4 @@
-# [TextOnPath](@id init_example)
+# [TextOnPath](@id textonpath)
 
 ## TextOnPath
 
