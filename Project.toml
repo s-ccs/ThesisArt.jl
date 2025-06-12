@@ -12,7 +12,7 @@ RollingFunctions = "b0e4dd01-7b14-53d8-9b45-175a3e362653"
 
 [compat]
 BSplineKit = "0.17"
-Makie = "0.21, 0.22"
+Makie = "0.21, 0.22, 0.23"
 MakieCore = "0.8"
 PDFIO = "0.1.14"
 RollingFunctions = "0.8"
