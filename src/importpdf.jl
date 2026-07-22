@@ -22,7 +22,7 @@ function getPDFText(src; pages = nothing)
             # Extract text from the page and write it to the output file.
             pdPageExtractText(io, page)
         catch e
-            @warn "error processing page $i"
+            @warn "error processing page $i - $(e.message)"
         end
     end
 

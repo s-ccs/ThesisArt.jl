@@ -33,6 +33,7 @@ nothing #hide
 ```@example main
  (h_title,h_nameyear),ax_title = add_title!(f,"My Awesome \n Thesis-Title","Benedikt Ehinger","August 2024")
  h_title.color= :white
+
     nothing #hide
 ```
 
@@ -49,14 +50,14 @@ nothing #hide
 ## Plot the text on path
 
 ```@example main
-textpath = ThesisArt.TextOnPath(t_text,path_bat)
-text!(ax_main,0,0,text=textpath,color = :white,fontsize=10)
+
+pathtext!(ax_main,path_bat,text=t_text,color = :white,fontsize=10)
 
 # and let's add some others to make it look cooler ;-)
-text!(ax_main,-0.1,+0.1,text=textpath,color = :white,fontsize=10)
-text!(ax_main,0.1,+0.1,text=textpath,color = :white,fontsize=10)
-xlims!(ax_main,[-0.2,0.5])
-ylims!(ax_main,[-0.5,1])
+pathtext!(ax_main,Makie.translate(path_bat,(-10,10)),text=t_text,color = :white,fontsize=10)
+pathtext!(ax_main,Makie.translate(path_bat,(+10,10)),text=t_text,color = :white,fontsize=10)
+xlims!(ax_main,[-50,250])
+ylims!(ax_main,[-150,250])
 ```
 
 Note: The text is repeated 3 times, not continued. Thus the words repeat as well. In the second tutorial, you'll see how we could combine paths/points.
