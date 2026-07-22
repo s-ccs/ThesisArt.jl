@@ -24,7 +24,7 @@ The lines are not that nice. Let's interpolate them
 
 ## order setting
 
-```@example ax_main
+```@example main
 my_xy_interpolated_2 =ThesisArt.rolling_interpolation(my_points;order=2)
 my_xy_interpolated_4 =ThesisArt.rolling_interpolation(my_points;order=4) # default
 ```
