@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Interpolation · ThesisArt.jl</title><meta name="title" content="Interpolation · ThesisArt.jl"/><meta property="og:title" content="Interpolation · ThesisArt.jl"/><meta property="twitter:title" content="Interpolation · ThesisArt.jl"/><meta name="description" content="Documentation for ThesisArt.jl."/><meta property="og:description" content="Documentation for ThesisArt.jl."/><meta property="twitter:description" content="Documentation for ThesisArt.jl."/><meta property="og:url" content="https://s-ccs.github.io/ThesisArt.jl/03-interpolation/"/><meta property="twitter:url" content="https://s-ccs.github.io/ThesisArt.jl/03-interpolation/"/><link rel="canonical" href="https://s-ccs.github.io/ThesisArt.jl/03-interpolation/"/><script data-outdated-warner src="../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../assets/documenter.js"></script><script src="../search_index.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../">ThesisArt.jl</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><a class="tocitem" href="../">ThesisArt</a></li><li><a class="tocitem" href="../01-example/">Example</a></li><li><a class="tocitem" href="../02-textonpath/">TextOnPath</a></li><li class="is-active"><a class="tocitem" href>Interpolation</a><ul class="internal"><li><a class="tocitem" href="#Interpolation"><span>Interpolation</span></a></li><li><a class="tocitem" href="#order-setting"><span>order setting</span></a></li><li><a class="tocitem" href="#subsample"><span>subsample</span></a></li><li><a class="tocitem" href="#Equalize-distance"><span>Equalize distance</span></a></li></ul></li><li><a class="tocitem" href="../90-contributing/">Contributing guidelines</a></li><li><a class="tocitem" href="../91-developer/">Developer documentation</a></li><li><a class="tocitem" href="../95-reference/">Reference</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li class="is-active"><a href>Interpolation</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Interpolation</a></li></ul></nav><div class="docs-right"><a class="docs-navbar-link" href="https://github.com/s-ccs/ThesisArt.jl/blob/main/docs/src/03-interpolation.md#" title="Edit source on GitHub"><span class="docs-icon fa-solid"></span></a><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="interpolate"><a class="docs-heading-anchor" href="#interpolate">Interpolation</a><a id="interpolate-1"></a><a class="docs-heading-anchor-permalink" href="#interpolate" title="Permalink"></a></h1><h2 id="Interpolation"><a class="docs-heading-anchor" href="#Interpolation">Interpolation</a><a id="Interpolation-1"></a><a class="docs-heading-anchor-permalink" href="#Interpolation" title="Permalink"></a></h2><pre><code class="language-julia hljs">using ThesisArt
+using CairoMakie
+using Random</code></pre><p>Let&#39;s define a (random) shape first</p><pre><code class="language-julia hljs">my_points = 400 .* (rand(MersenneTwister(1),Point2f,20).-Point2f(0.5,0.5))</code></pre><pre><code class="language-julia hljs">scatterlines(my_points)</code></pre><img src="39389f0e.png" alt="Example block output"/><p>The lines are not that nice. Let&#39;s interpolate them</p><h2 id="order-setting"><a class="docs-heading-anchor" href="#order-setting">order setting</a><a id="order-setting-1"></a><a class="docs-heading-anchor-permalink" href="#order-setting" title="Permalink"></a></h2><pre><code class="language-julia hljs">my_xy_interpolated_2 =ThesisArt.rolling_interpolation(my_points;order=2)
+my_xy_interpolated_4 =ThesisArt.rolling_interpolation(my_points;order=4) # default</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">106-element Vector{GeometryBasics.Point{2, Float32}}:
+ [157.82256, -119.78998]
+ [157.08952, -127.26245]
+ [156.46927, -133.58531]
+ [156.52565, -133.01051]
+ [157.82256, -119.78998]
+ [157.82256, -119.78998]
+ [173.24464, -75.421906]
+ [188.02908, -20.19335]
+ [192.22122, 31.22136]
+ [175.86638, 64.14791]
+ ⋮
+ [-75.62332, -78.74212]
+ [-28.452902, -70.153534]
+ [9.290982, -60.499332]
+ [9.290983, -60.499336]
+ [20.677866, -60.185646]
+ [21.172947, -60.172005]
+ [15.727046, -60.322033]
+ [9.290981, -60.499336]
+ [9.290981, -60.499336]</code></pre><pre><code class="language-julia hljs">f = Figure()
+scatterlines(f[1,1],my_xy_interpolated_2,axis=(;title=&quot;Order 2&quot;))
+scatter!(my_points,color=:red)
+scatterlines(f[1,2],my_xy_interpolated_4,axis=(;title=&quot;Order 4&quot;))
+scatter!(my_points,color=:red)
+f</code></pre><img src="b16c51d6.png" alt="Example block output"/><p>We see left linear interpolation, right cubic interpolation.</p><h2 id="subsample"><a class="docs-heading-anchor" href="#subsample">subsample</a><a id="subsample-1"></a><a class="docs-heading-anchor-permalink" href="#subsample" title="Permalink"></a></h2><pre><code class="language-julia hljs">my_xy_interpolated_20 =ThesisArt.rolling_interpolation(my_points;subsample=20)
+my_xy_interpolated_5 =ThesisArt.rolling_interpolation(my_points;subsample=5) #</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">106-element Vector{GeometryBasics.Point{2, Float32}}:
+ [157.82256, -119.78998]
+ [157.08952, -127.26245]
+ [156.46927, -133.58531]
+ [156.52565, -133.01051]
+ [157.82256, -119.78998]
+ [157.82256, -119.78998]
+ [173.24464, -75.421906]
+ [188.02908, -20.19335]
+ [192.22122, 31.22136]
+ [175.86638, 64.14791]
+ ⋮
+ [-75.62332, -78.74212]
+ [-28.452902, -70.153534]
+ [9.290982, -60.499332]
+ [9.290983, -60.499336]
+ [20.677866, -60.185646]
+ [21.172947, -60.172005]
+ [15.727046, -60.322033]
+ [9.290981, -60.499336]
+ [9.290981, -60.499336]</code></pre><pre><code class="language-julia hljs">f = Figure()
+scatterlines(f[1,1],my_xy_interpolated_5,axis=(;title=&quot;subsample 5&quot;))
+scatter!(my_points,color=:red)
+scatterlines(f[1,2],my_xy_interpolated_20,axis=(;title=&quot;subsample 20&quot;))
+scatter!(my_points,color=:red)
+f</code></pre><img src="c89c294b.png" alt="Example block output"/><h2 id="Equalize-distance"><a class="docs-heading-anchor" href="#Equalize-distance">Equalize distance</a><a id="Equalize-distance-1"></a><a class="docs-heading-anchor-permalink" href="#Equalize-distance" title="Permalink"></a></h2><pre><code class="language-julia hljs">my_xy_interpolated_100 =ThesisArt.rolling_interpolation(my_points;subsample=100)
+
+my_xy_equ_10 = equalize_distance(my_xy_interpolated_100,min_dist=10)
+my_xy_equ_50 = equalize_distance(my_xy_interpolated_100,min_dist=50)</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">80-element Vector{GeometryBasics.Point{2, Float32}}:
+ [157.82256, -119.78998]
+ [164.1183, -102.351006]
+ [180.01411, -53.027847]
+ [190.56134, -5.7232065]
+ [189.77821, 44.21065]
+ [151.12505, 64.922424]
+ [101.91846, 56.833973]
+ [55.548077, 43.512424]
+ [7.917038, 25.922392]
+ [-37.221954, 5.694793]
+ ⋮
+ [-89.52992, 107.43959]
+ [-109.5856, 62.221436]
+ [-128.80138, 16.678045]
+ [-145.2937, -32.425888]
+ [-135.20197, -75.28105]
+ [-86.15077, -79.805374]
+ [-38.08555, -72.299545]
+ [12.074724, -60.42265]
+ [9.290981, -60.499336]</code></pre><pre><code class="language-julia hljs">f = Figure()
+scatterlines(f[1,1],my_xy_equ_10,axis=(;title=&quot;mindist 10&quot;))
+scatter!(my_points,color=:red)
+scatterlines(f[1,2],my_xy_equ_50,axis=(;title=&quot;mindist 50&quot;))
+scatter!(my_points,color=:red)
+f</code></pre><img src="07145310.png" alt="Example block output"/></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../02-textonpath/">« TextOnPath</a><a class="docs-footer-nextpage" href="../90-contributing/">Contributing guidelines »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.17.0 on <span class="colophon-date" title="Wednesday 22 July 2026 21:19">Wednesday 22 July 2026</span>. Using Julia version 1.12.6.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
