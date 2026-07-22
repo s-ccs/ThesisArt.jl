@@ -14,7 +14,6 @@ Let's define a (random) shape first
 ```@example main
 my_points = 400 .* (rand(MersenneTwister(1),Point2f,20).-Point2f(0.5,0.5))
 my_path = ThesisArt.points_to_bezierpath(my_points)
-Figure*
 nothing #hide
 ```
 
