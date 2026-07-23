@@ -49,6 +49,7 @@ if a color per glyph is provided, use that color
 ```@example main
 c = CairoMakie.cgrad(:RdBu,500)|>collect|> x->x[1:500]
 pathtext(f[1,2],my_path,text=my_text[1:500],color=c)
+f
 ```
 
 ## Color by segment
